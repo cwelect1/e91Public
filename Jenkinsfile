@@ -12,15 +12,9 @@ pipeline {
             steps {
                 sh "echo DEV DEPLOY"
                 sshagent (credentials: ['e91user']) {
-                    sh "ssh -o StrictHostKeyChecking=no root@34.201.7.71 'cd e91Public && git pull origin dev && gitcheckout . && git checkout stage && git merge dev && git push '"
+                    sh "ssh -o StrictHostKeyChecking=no root@34.201.7.71 'cd e91Public && git pull origin dev && gitcheckout . && git checkout stage && git merge dev && git push && docker build . -t devnode && docker run -p 80:80 devnode'"
                 }
                 sleep 2
-            }
-        }
-        
-        stage('Build image') {
-            steps {
-                app = docker.build("cscie91/devnode")
             }
         }
     }
