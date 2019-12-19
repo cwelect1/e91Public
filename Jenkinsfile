@@ -3,42 +3,27 @@ pipeline {
 
     stages{
         script{
-            if(env.BRANCH_NAME == 'dev'){
-                stage('Build'){
+            stage('Build'){
+                if(env.BRANCH_NAME == 'dev'){
                     steps {
                         sh 'echo DEV BUILD'
                     }
-
                 }
-                stage ('Deploy to staging') {
+                else if(env.BRANCH_NAME == 'stage'){
+                    steps {
+                        sh 'echo STAGE BUILD'
+                    }
+                }
+            }
+            stage ('Deploy to staging') {
+                if(env.BRANCH_NAME == 'stage'){
                     steps {
                         sh "echo DEV DEPLOY"
                     }
                 }
-            }
-            else if(env.BRANCH_NAME == 'stage'){
-                stage('Build'){
+                else if(env.BRANCH_NAME == 'stage'){
                     steps {
-                        sh 'echo STAGE BUILD'
-                    }
-
-                }
-                stage ('Deploy to staging') {
-                    steps {
-                        sh "echo STAGE DEPLOY"
-                    }
-                }
-            }
-            else(env.BRANCH_NAME == 'master'){
-                stage('Build'){
-                    steps {
-                        sh 'echo MASTER BUILD'
-                    }
-
-                }
-                stage ('Deploy to staging') {
-                    steps {
-                        sh "echo PROD DEPLOY"
+                        sh 'echo STAGE DEPLOY'
                     }
                 }
             }
