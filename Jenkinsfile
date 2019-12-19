@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    def app
     stages{
         stage('Build'){
             steps {
@@ -20,7 +20,7 @@ pipeline {
         
         stage('Build image') {
             steps {
-                docker.build("cscie91/devnode")
+                app = docker.build("cscie91/devnode")
             }
         }
     }
