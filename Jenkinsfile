@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    script{
+    stages{
+        script{
             if(env.BRANCH_NAME == 'dev'){
-            stages{
                 stage('Build'){
                     steps {
                         sh 'echo DEV BUILD'
@@ -16,9 +16,7 @@ pipeline {
                     }
                 }
             }
-        }
-        if(env.BRANCH_NAME == 'stage'){
-            stages{
+            else if(env.BRANCH_NAME == 'stage'){
                 stage('Build'){
                     steps {
                         sh 'echo STAGE BUILD'
@@ -31,9 +29,7 @@ pipeline {
                     }
                 }
             }
-        }
-        if(env.BRANCH_NAME == 'master'){
-            stages{
+            else(env.BRANCH_NAME == 'master'){
                 stage('Build'){
                     steps {
                         sh 'echo MASTER BUILD'
