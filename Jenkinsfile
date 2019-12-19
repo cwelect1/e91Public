@@ -3,26 +3,30 @@ pipeline {
 
     stages{
         stage('Build'){
-            if(env.BRANCH_NAME == 'dev'){
-                steps {
-                    sh 'echo DEV BUILD'
+            Script{
+                if(env.BRANCH_NAME == 'dev'){
+                    steps {
+                        sh 'echo DEV BUILD'
+                    }
                 }
-            }
-            else if(env.BRANCH_NAME == 'stage'){
-                steps {
-                    sh 'echo STAGE BUILD'
+                else if(env.BRANCH_NAME == 'stage'){
+                    steps {
+                        sh 'echo STAGE BUILD'
+                    }
                 }
             }
         }
         stage ('Deploy to staging') {
-            if(env.BRANCH_NAME == 'stage'){
-                steps {
-                    sh "echo DEV DEPLOY"
+            Script{
+                if(env.BRANCH_NAME == 'stage'){
+                    steps {
+                        sh "echo DEV DEPLOY"
+                    }
                 }
-            }
-            else if(env.BRANCH_NAME == 'stage'){
-                steps {
-                    sh 'echo STAGE DEPLOY'
+                else if(env.BRANCH_NAME == 'stage'){
+                    steps {
+                        sh 'echo STAGE DEPLOY'
+                    }
                 }
             }
         }
