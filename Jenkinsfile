@@ -19,7 +19,9 @@ pipeline {
         }
         
         stage('Build image') {
-            app = docker.build("getintodevops/hellonode")
+            steps {
+                app = docker.build("getintodevops/hellonode")
+            }
         }
     }
 }
