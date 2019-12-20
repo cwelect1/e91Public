@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh "echo DEV DEPLOY"
                 sshagent (credentials: ['e91user']) {
-                    sh "ssh -o StrictHostKeyChecking=no root@34.201.7.71 'cd e91Public && git pull origin dev && git checkout dev && docker build . -t devnode && docker run -p 80:80 devnode'"
+                    sh "ssh -o StrictHostKeyChecking=no root@34.201.7.71 'cd e91Public && git pull origin dev && git checkout dev && docker build . -t devnode && docker run -p 80:80 devnode -h cscie91.harvard.edu'"
                 }
                 sleep 2
             }
